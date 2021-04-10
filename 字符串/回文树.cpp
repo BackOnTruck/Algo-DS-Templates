@@ -20,6 +20,8 @@ struct PAM
 		while(*c)extend(*c),s[length]=*c++;
 	}
 	static int ID(char x){return x-'a';}
+	// 这里cnt统计的是每个结点对应的回文串个数。如果需要逐个添加字符，计算后缀回文串的个数，
+	// 只需在extend()最后加上q->cnt=q->p->cnt+1，并将p->go[x]->cnt++删去即可
 	void extend(char ch)
 	{
 		int x=ID(s[++length]=ch);
