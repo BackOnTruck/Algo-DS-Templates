@@ -8,8 +8,8 @@ void gcd(int a,int b,int &d,int &x,int &y)
 }
 int mul(int a,int n,int m)
 {
-	if(!n)return 1;
-	return (2*mul(a,n/2,m)+(n&1?a:1))%m;
+	if(!n)return 0;
+	return (2*mul(a,n/2,m)+(n&1?a:0))%m;
 }
 int n,a[110001],m[110001];
 main()
@@ -24,7 +24,7 @@ main()
 		p=mul((p%m[i]+m[i])%m[i],ai/d,m[i]);
 		int newM=M/d*m[i];
 		x=(x+mul(p,M,newM))%newM;
-		printf("now x = %lld\n",x);
+		M=newM;
 	}
 	printf("%lld\n",x);
 }
