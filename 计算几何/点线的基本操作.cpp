@@ -1,7 +1,7 @@
 #include<iostream>
 #include<cmath>
 using namespace std;
-const double eps=1e-10;
+const double eps=1e-10,pi=acos(-1);
 int dcmp(double x) //signum(x)
 {
 	if(-eps<x&&x<eps)return 0;
@@ -16,10 +16,11 @@ struct point
 	point operator-(point b)const{return point(x-b.x,y-b.y);}
 	point operator*(double p)const{return point(x*p,y*p);}
 	point operator/(double p)const{return point(x/p,y/p);}
+	point operator-()const{return point(-x,-y);}
 	//comparison
 	bool operator<(const point &b)const{return x<b.x||(x==b.x&&y<b.y);}
 	bool operator==(const point &b)const{return !dcmp(x-b.x)&&!dcmp(y-b.y);}
-	bool operator>(const point &b)const{return x>b.x||(x==b.x&&y>b.y);}
+	void input(){scanf("%lf%lf",&x,&y);}
 };
 typedef point vec; //vector
 point operator*(double p,point a){return point(a.x*p,a.y*p);}
@@ -39,7 +40,7 @@ vec normal(vec a)
 	return vec(-a.y/len,a.x/len);
 }
 
-//<a,b> & area of △abc
+//<a,b> & area of Triangle ABC
 double angle(vec a,vec b){return acos(dot(a,b)/length(a)/length(b));}
 double area(point a,point b,point c){return cross(b-a,c-a)/2;}
 
@@ -78,6 +79,3 @@ double area(point *p,int n)
 	for(int i=2;i<n;i++)s+=cross(p[i-1]-p[0],p[i]-p[0]);
 	return s/2;
 }
-
-
-int main(){}
